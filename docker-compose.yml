@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  customer-service:
+    image: rjayb2b/devops:v1  # Added space after 'image:'
+    container_name: customer-container  # Changed container name to remove spaces
+    ports:
+      - "8080:8080"  # Added '-' to indicate a list item
+

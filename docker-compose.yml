@@ -2,8 +2,13 @@ version: '3.8'
 
 services:
   customer-service:
-    image: rjayb2b/devops:v1  # Added space after 'image:'
-    container_name: customer-container  # Changed container name to remove spaces
+    image: rjayb2b/devops:v1
+    container_name: customer-container
     ports:
-      - "8080:8080"  # Added '-' to indicate a list item
+      - "8080:8080"  
 
+  admin-service:
+    image: rjayb2b/devops:v2
+    container_name: admin-container
+    ports:
+      - "8081:8080"

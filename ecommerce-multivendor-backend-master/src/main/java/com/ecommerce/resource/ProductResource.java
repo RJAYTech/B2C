@@ -112,48 +112,43 @@ public class ProductResource {
 
 	public ResponseEntity<CommonApiResponse> updateProductDetail(ProductDetailUpdateRequest request) {
 
-		LOG.info("request received for update product");
+	    LOG.info("Request received for updating product");
 
-		CommonApiResponse response = new CommonApiResponse();
+	    CommonApiResponse response = new CommonApiResponse();
 
-		if (request == null) {
-			response.setResponseMessage("missing input");
-			response.setSuccess(false);
+	    if (request == null ) { // Ensure the request and product ID are not null
+	        response.setResponseMessage("Missing input or invalid product ID");
+	        response.setSuccess(false);
+	        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	    }
 
-			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
-		}
+	    Product product = this.productService.getProductById(request.getId());
 
-		Product product = this.productService.getProductById(request.getId());
+	    if (product == null) { // If the product does not exist
+	        response.setResponseMessage("Product not found");
+	        response.setSuccess(false);
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
 
-		if (product == null) {
-			response.setResponseMessage("product not found");
-			response.setSuccess(false);
+	    // Update product fields without altering the category
+	    product.setDescription(request.getDescription());
+	    product.setName(request.getName());
+	    product.setPrice(request.getPrice());
+	    product.setQuantity(request.getQuantity());
 
-			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	    // Save updated product
+	    Product updatedProduct = this.productService.updateProduct(product);
 
-		// it will update the category if changed
-		if (product.getCategory().getId() != request.getCategoryId()) {
-			Category category = this.categoryService.getCategoryById(request.getCategoryId());
-			product.setCategory(category);
-		}
+	    if (updatedProduct == null) { // If updating fails
+	        throw new ProductSaveFailedException("Failed to update the Product details");
+	    }
 
-		product.setDescription(request.getDescription());
-		product.setName(request.getName());
-		product.setPrice(request.getPrice());
-		product.setQuantity(request.getQuantity());
+	    response.setResponseMessage("Product updated successfully");
+	    response.setSuccess(true);
 
-		Product updatedProduct = this.productService.updateProduct(product);
-
-		if (updatedProduct == null) {
-			throw new ProductSaveFailedException("Failed to update the Product details");
-		}
-
-		response.setResponseMessage("Product added successful");
-		response.setSuccess(true);
-
-		return new ResponseEntity<CommonApiResponse>(response, HttpStatus.OK);
+	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
 
 	public ResponseEntity<CommonApiResponse> updateProductImage(ProductAddRequest request) {
 

@@ -40,8 +40,7 @@ import jakarta.transaction.Transactional;
 
 @Component
 @Transactional
-public class UserResource
- {
+public class UserResource {
 
 	private final Logger LOG = LoggerFactory.getLogger(UserResource.class);
 

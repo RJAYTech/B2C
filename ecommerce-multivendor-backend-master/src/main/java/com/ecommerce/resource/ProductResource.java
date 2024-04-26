@@ -135,6 +135,13 @@ public class ProductResource {
 	    product.setName(request.getName());
 	    product.setPrice(request.getPrice());
 	    product.setQuantity(request.getQuantity());
+	    
+	    Category categoryById = this.categoryService.getCategoryById(request.getCategoryId());
+	    
+	    if(categoryById!=null) {
+	    	product.setCategory(categoryById);
+	    }
+	    
 
 	    // Save updated product
 	    Product updatedProduct = this.productService.updateProduct(product);

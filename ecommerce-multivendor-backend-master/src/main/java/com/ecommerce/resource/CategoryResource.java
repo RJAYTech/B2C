@@ -37,16 +37,18 @@ public class CategoryResource {
 	private ProductService productService;
 
 	public ResponseEntity<CommonApiResponse> addCategory(Category category) {
-		
+
 		LOG.info("Request received for add category");
 
 		CommonApiResponse response = new CommonApiResponse();
 
-		if (category == null) {
-			response.setResponseMessage("missing input");
+		// Validate if the category object is not null and if both name and description
+		// are not null or empty
+		if (category == null || category.getName() == null || category.getDescription() == null
+				|| category.getName().isEmpty() || category.getDescription().isEmpty()) {
+			response.setResponseMessage("Name and description are required");
 			response.setSuccess(false);
-
-			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 		}
 
 		category.setStatus(CategoryStatus.ACTIVE.value());
@@ -65,7 +67,7 @@ public class CategoryResource {
 	}
 
 	public ResponseEntity<CommonApiResponse> updateCategory(Category category) {
-		
+
 		LOG.info("Request received for add category");
 
 		CommonApiResponse response = new CommonApiResponse();

@@ -37,13 +37,13 @@ public class EcommerceBackendApplication implements CommandLineRunner {
 		if (admin == null) {
 
 			LOG.info("Admin not found in system, so adding default admin");
-			
+
 			User user = new User();
 			user.setEmailId("demo.admin@demo.com");
 			user.setPassword(passwordEncoder.encode("123456"));
 			user.setRole(UserRole.ROLE_ADMIN.value());
 			user.setStatus(UserStatus.ACTIVE.value());
-			
+
 			this.userService.addUser(user);
 
 		}

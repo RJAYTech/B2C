@@ -12,7 +12,7 @@ import com.ecommerce.entity.User;
 
 @Service
 public class CartServiceImpl implements CartService {
-	
+
 	@Autowired
 	private CartDao cartDao;
 
@@ -38,13 +38,13 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Cart getCartById(int cartId) {
-		
+
 		Optional<Cart> optionalCart = this.cartDao.findById(cartId);
-		
-		if(optionalCart.isPresent()) {
+
+		if (optionalCart.isPresent()) {
 			return optionalCart.get();
 		}
-		
+
 		else {
 			return null;
 		}

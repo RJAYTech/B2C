@@ -16,7 +16,7 @@ public interface CartService {
 	List<Cart> findByUser(User user);
 
 	Cart getCartById(int cartId);
-	
+
 	void deleteCarts(List<Cart> cart);
 
 }

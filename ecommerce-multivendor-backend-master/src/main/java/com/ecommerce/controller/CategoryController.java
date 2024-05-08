@@ -23,28 +23,28 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("api/category")
 @CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
-	
+
 	@Autowired
 	private CategoryResource categoryResource;
-	
+
 	@PostMapping("/add")
 	@Operation(summary = "Api to add category")
 	public ResponseEntity<CommonApiResponse> addCategory(@RequestBody Category category) {
 		return categoryResource.addCategory(category);
 	}
-	
+
 	@PutMapping("/update")
 	@Operation(summary = "Api to update category")
 	public ResponseEntity<CommonApiResponse> updateCategory(@RequestBody Category category) {
 		return categoryResource.updateCategory(category);
 	}
-	
+
 	@GetMapping("/fetch/all")
 	@Operation(summary = "Api to fetch all category")
 	public ResponseEntity<CategoryResponseDto> fetchAllCategory() {
 		return categoryResource.fetchAllCategory();
 	}
-	
+
 	@DeleteMapping("/delete")
 	@Operation(summary = "Api to delete category all its products")
 	public ResponseEntity<CommonApiResponse> deleteCategory(@RequestParam("categoryId") int categoryId) {

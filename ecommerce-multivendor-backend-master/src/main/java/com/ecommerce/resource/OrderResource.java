@@ -92,50 +92,50 @@ public class OrderResource {
 		Map<User, List<Cart>> cartItemsBySeller = new HashMap<>();
 
 		for (Cart cart : carts) {
-		    User seller = cart.getProduct().getSeller();
+			User seller = cart.getProduct().getSeller();
 
-		    // Check if the seller is already in the map
-		    if (!cartItemsBySeller.containsKey(seller)) {
-		        cartItemsBySeller.put(seller, new ArrayList<>());
-		    }
+			// Check if the seller is already in the map
+			if (!cartItemsBySeller.containsKey(seller)) {
+				cartItemsBySeller.put(seller, new ArrayList<>());
+			}
 
-		    // Add the cart item to the corresponding seller's list
-		    cartItemsBySeller.get(seller).add(cart);
+			// Add the cart item to the corresponding seller's list
+			cartItemsBySeller.get(seller).add(cart);
 		}
 
 		// Generate orders for each seller
 		List<Orders> orders = new ArrayList<>();
 
 		for (Map.Entry<User, List<Cart>> entry : cartItemsBySeller.entrySet()) {
-		  
-		    List<Cart> sellerCartItems = entry.getValue();
 
-		    // Generate a unique order ID for each seller
-		    String orderId = Helper.generateOrderId();
+			List<Cart> sellerCartItems = entry.getValue();
 
-		    for (Cart cart : sellerCartItems) {
-		        if (cart.getProduct().getQuantity() < cart.getQuantity()) {
-		            throw new OrderSaveFailedException("Failed to Order, few products are out of stock");
-		        }
+			// Generate a unique order ID for each seller
+			String orderId = Helper.generateOrderId();
 
-		        Orders order = new Orders();
-		        order.setOrderId(orderId);
-		        order.setUser(user);
-		        order.setOrderTime(orderTime);
-		        order.setQuantity(cart.getQuantity());
-		        order.setProduct(cart.getProduct());
-		        order.setStatus(DeliveryStatus.PENDING.value());
-		        order.setDeliveryStatus(DeliveryStatus.PENDING.value());
+			for (Cart cart : sellerCartItems) {
+				if (cart.getProduct().getQuantity() < cart.getQuantity()) {
+					throw new OrderSaveFailedException("Failed to Order, few products are out of stock");
+				}
 
-		        orders.add(order);
-		        
-		        Product productToUpdate = cart.getProduct();
+				Orders order = new Orders();
+				order.setOrderId(orderId);
+				order.setUser(user);
+				order.setOrderTime(orderTime);
+				order.setQuantity(cart.getQuantity());
+				order.setProduct(cart.getProduct());
+				order.setStatus(DeliveryStatus.PENDING.value());
+				order.setDeliveryStatus(DeliveryStatus.PENDING.value());
+
+				orders.add(order);
+
+				Product productToUpdate = cart.getProduct();
 
 				int quantity = productToUpdate.getQuantity() - cart.getQuantity();
 				productToUpdate.setQuantity(quantity);
 
 				products.add(productToUpdate);
-		    }
+			}
 		}
 
 		List<Orders> addedOrders = this.orderService.addOrder(orders);

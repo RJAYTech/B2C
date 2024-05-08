@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 public class Address {
@@ -16,6 +19,9 @@ public class Address {
 
 	private String city;
 
+    
+	@Min(value = 100000, message = "Pincode must be exactly 6 digits.")
+	@Max(value = 999999, message = "Pincode must be exactly 6 digits.")
 	private int pincode;
 
 	public int getId() {

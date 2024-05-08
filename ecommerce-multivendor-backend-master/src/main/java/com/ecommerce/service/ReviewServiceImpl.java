@@ -12,7 +12,7 @@ import com.ecommerce.entity.User;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
-	
+
 	@Autowired
 	private ReviewDao reviewDao;
 

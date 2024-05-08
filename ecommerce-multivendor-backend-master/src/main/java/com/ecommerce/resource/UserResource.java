@@ -92,12 +92,45 @@ public class UserResource {
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
+		List<User> byPhoneNoo = this.userService.findByPhoneNoo(registerRequest.getPhoneNo());
+
+		if (!byPhoneNoo.isEmpty()) {
+			response.setResponseMessage("User with this PhoneNumber already resgistered!!!");
+			response.setSuccess(false);
+
+			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		String phoneNo = registerRequest.getPhoneNo();
+
+		char firstChar = phoneNo.charAt(0);
+
+		if (!(firstChar == '6' || firstChar == '7' || firstChar == '8' || firstChar == '9')) {
+			response.setResponseMessage("Mobile number should start with one of the following: 6, 7, 8, or 9");
+			response.setSuccess(false);
+
+			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
 		User user = RegisterUserRequestDto.toUserEntity(registerRequest);
 
 		user.setRole(UserRole.ROLE_ADMIN.value());
 		user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 		user.setStatus(UserStatus.ACTIVE.value());
 
+		Address address = new Address();
+		address.setCity(registerRequest.getCity());
+		address.setPincode(registerRequest.getPincode());
+		address.setStreet(registerRequest.getStreet());
+
+		Address savedAddress = this.addressService.addAddress(address);
+
+		if (savedAddress == null) {
+			throw new UserSaveFailedException("Registration Failed because of Technical issue:(");
+		}
+
+		user.setAddress(savedAddress);
+		
 		existingUser = this.userService.addUser(user);
 
 		if (existingUser == null) {
@@ -137,6 +170,27 @@ public class UserResource {
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
 
+		
+
+		String phoneNo = request.getPhoneNo();
+
+		char firstChar = phoneNo.charAt(0);
+
+		if (!(firstChar == '6' || firstChar == '7' || firstChar == '8' || firstChar == '9')) {
+			response.setResponseMessage("Mobile number should start with one of the following: 6, 7, 8, or 9");
+			response.setSuccess(false);
+
+			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
+		}
+
+		 // Check for existing user by phone number
+	     List<User> byPhoneNoo = userService.findByPhoneNoo(request.getPhoneNo());
+	    if (!byPhoneNoo.isEmpty()) {
+	        response.setResponseMessage("A user with this phone number is already registered.");
+	        response.setSuccess(false);
+	        return new ResponseEntity<CommonApiResponse>(response, HttpStatus.CONFLICT);
+	    }
+	    
 		if (request.getRole() == null) {
 			response.setResponseMessage("bad request ,Role is missing");
 			response.setSuccess(false);
@@ -166,7 +220,7 @@ public class UserResource {
 			user.setSeller(seller);
 
 		}
-		
+
 		Address address = new Address();
 		address.setCity(request.getCity());
 		address.setPincode(request.getPincode());
@@ -184,8 +238,6 @@ public class UserResource {
 		if (existingUser == null) {
 			throw new UserSaveFailedException("Registration Failed because of Technical issue:(");
 		}
-
-		
 
 		response.setResponseMessage("User registered Successfully");
 		response.setSuccess(true);
@@ -458,10 +510,9 @@ public class UserResource {
 			response.setSuccess(false);
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
+
 		delivery.setStatus(UserStatus.DEACTIVATED.value());
 
-		
 		User deletedDelivery = this.userService.updateUser(delivery);
 
 		// deactivating the seller

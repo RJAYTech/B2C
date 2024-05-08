@@ -1,38 +1,33 @@
 package com.ecommerce.utility;
 
 public class Constants {
-	
+
 	public enum UserRole {
-		ROLE_CUSTOMER("Customer"),
-		ROLE_ADMIN("Admin"),
-		ROLE_SELLER("Seller"),
-		ROLE_DELIVERY("Delivery");
-		
+		ROLE_CUSTOMER("Customer"), ROLE_ADMIN("Admin"), ROLE_SELLER("Seller"), ROLE_DELIVERY("Delivery");
+
 		private String role;
 
-	    private UserRole(String role) {
-	      this.role = role;
-	    }
+		private UserRole(String role) {
+			this.role = role;
+		}
 
-	    public String value() {
-	      return this.role;
-	    }    
+		public String value() {
+			return this.role;
+		}
 	}
-	
+
 	public enum UserStatus {
-		ACTIVE("Active"),
-		DEACTIVATED("Deactivated");
-		
-		
+		ACTIVE("Active"), DEACTIVATED("Deactivated");
+
 		private String status;
 
-	    private UserStatus(String status) {
-	      this.status = status;
-	    }
+		private UserStatus(String status) {
+			this.status = status;
+		}
 
-	    public String value() {
-	      return this.status;
-	    }    
+		public String value() {
+			return this.status;
+		}
 	}
 
 	public enum DeliveryStatus {
@@ -65,53 +60,48 @@ public class Constants {
 		}
 
 	}
-	
+
 	public enum IsDeliveryAssigned {
-		YES("Yes"),
-		NO("No");
-		
+		YES("Yes"), NO("No");
+
 		private String isDeliveryAssigned;
 
-	    private IsDeliveryAssigned(String isDeliveryAssigned) {
-	      this.isDeliveryAssigned = isDeliveryAssigned;
-	    }
+		private IsDeliveryAssigned(String isDeliveryAssigned) {
+			this.isDeliveryAssigned = isDeliveryAssigned;
+		}
 
-	    public String value() {
-	      return this.isDeliveryAssigned;
-	    }
-	     
+		public String value() {
+			return this.isDeliveryAssigned;
+		}
+
 	}
-	
+
 	public enum CategoryStatus {
-		ACTIVE("Active"),
-		DEACTIVATED("Deactivated");
-		
-		
+		ACTIVE("Active"), DEACTIVATED("Deactivated");
+
 		private String status;
 
-	    private CategoryStatus(String status) {
-	      this.status = status;
-	    }
+		private CategoryStatus(String status) {
+			this.status = status;
+		}
 
-	    public String value() {
-	      return this.status;
-	    }    
+		public String value() {
+			return this.status;
+		}
 	}
-	
+
 	public enum ProductStatus {
-		ACTIVE("Active"),
-		DEACTIVATED("Deactivated");
-		
-		
+		ACTIVE("Active"), DEACTIVATED("Deactivated");
+
 		private String status;
 
-	    private ProductStatus(String status) {
-	      this.status = status;
-	    }
+		private ProductStatus(String status) {
+			this.status = status;
+		}
 
-	    public String value() {
-	      return this.status;
-	    }    
+		public String value() {
+			return this.status;
+		}
 	}
-	
+
 }

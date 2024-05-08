@@ -20,13 +20,13 @@ public interface OrderService {
 	Orders updateOrder(Orders order);
 
 	List<Orders> getOrdersByOrderIdAndStatusIn(String orderId, List<String> status);
-	
+
 	List<Orders> getOrdersByUserAndStatusIn(User user, List<String> status);
-	
+
 	List<Orders> getOrdersBySellerAndStatusIn(User user, List<String> status);
-	
+
 	List<Orders> getAllOrders();
-	
+
 	List<Orders> getOrdersByDeliveryPersonAndStatusIn(User user, List<String> status);
 
 }

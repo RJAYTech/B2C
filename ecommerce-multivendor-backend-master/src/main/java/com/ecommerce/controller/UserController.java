@@ -44,39 +44,40 @@ public class UserController {
 	public ResponseEntity<CommonApiResponse> registerUser(@RequestBody RegisterUserRequestDto request) {
 		return this.userResource.registerUser(request);
 	}
-	
+
 	@PostMapping("login")
-	@Operation(summary =  "Api to login any User")
+	@Operation(summary = "Api to login any User")
 	public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest) {
 		return userResource.login(userLoginRequest);
 	}
-	
+
 	@GetMapping("/fetch/role-wise")
-	@Operation(summary =  "Api to get Users By Role")
-	public ResponseEntity<UserResponseDto> fetchAllUsersByRole(@RequestParam("role") String role) throws JsonProcessingException {
+	@Operation(summary = "Api to get Users By Role")
+	public ResponseEntity<UserResponseDto> fetchAllUsersByRole(@RequestParam("role") String role)
+			throws JsonProcessingException {
 		return userResource.getUsersByRole(role);
 	}
-	
+
 	@GetMapping("/fetch/seller/delivery-person")
-	@Operation(summary =  "Api to get Delivery persons by seller")
+	@Operation(summary = "Api to get Delivery persons by seller")
 	public ResponseEntity<UserResponseDto> fetchDeliveryPerson(@RequestParam("sellerId") int sellerId) {
 		return userResource.getDeliveryPersonsBySeller(sellerId);
 	}
-	
+
 	@PutMapping("update/status")
-	@Operation(summary =  "Api to update the user status")
+	@Operation(summary = "Api to update the user status")
 	public ResponseEntity<CommonApiResponse> updateUserStatus(@RequestBody UserStatusUpdateRequestDto request) {
 		return userResource.updateUserStatus(request);
 	}
-	
+
 	@DeleteMapping("delete/seller")
-	@Operation(summary =  "Api to update the user status")
+	@Operation(summary = "Api to update the user status")
 	public ResponseEntity<CommonApiResponse> deleteSeller(@RequestParam("sellerId") int sellerId) {
 		return userResource.deleteSeller(sellerId);
 	}
-	
+
 	@DeleteMapping("delete/seller/delivery-person")
-	@Operation(summary =  "Api to update the user status")
+	@Operation(summary = "Api to update the user status")
 	public ResponseEntity<CommonApiResponse> deleteDeliveryPerson(@RequestParam("deliveryId") int deliveryId) {
 		return userResource.deleteDeliveryPerson(deliveryId);
 	}

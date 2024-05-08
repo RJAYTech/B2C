@@ -19,11 +19,13 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	List<User> findByRole(String role);
 
 	List<User> findBySellerAndRole(User seller, String role);
-	
+
 	List<User> findBySellerAndRoleAndStatusIn(User seller, String role, List<String> status);
-	
+
 	User findByEmailIdAndRoleAndStatus(String emailId, String role, String status);
-	
+
 	List<User> findByRoleAndStatus(String role, String status);
+
+	 List<User> findByPhoneNo(String phoneNo);
 
 }

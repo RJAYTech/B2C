@@ -13,9 +13,9 @@ import com.ecommerce.entity.User;
 
 @Repository
 public interface ReviewDao extends JpaRepository<Review, Integer> {
-	
+
 	List<Review> findByProductIn(List<Product> products);
-	
+
 	@Query("SELECT r FROM Review r WHERE r.product.seller = :seller")
 	List<Review> findAllOrdersBySeller(@Param("seller") User seller);
 

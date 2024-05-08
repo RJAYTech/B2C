@@ -21,22 +21,22 @@ import io.swagger.v3.oas.annotations.Operation;
 @RequestMapping("api/product/review")
 @CrossOrigin(origins = "http://localhost:3000")
 public class ReviewController {
-	
+
 	@Autowired
 	private ReviewResource reviewResource;
-	
+
 	@PostMapping("add")
 	@Operation(summary = "Api to add product review")
 	public ResponseEntity<CommonApiResponse> addProductReview(@RequestBody AddReviewRequest review) {
 		return this.reviewResource.addReview(review);
 	}
-	
+
 	@GetMapping("fetch")
 	@Operation(summary = "Api to fetch product reviews")
 	public ResponseEntity<ProductReviewResponseDto> fetchProductReview(@RequestParam("productId") int productReview) {
 		return this.reviewResource.fetchProductReviews(productReview);
 	}
-	
+
 	@GetMapping("seller")
 	@Operation(summary = "Api to fetch seller product review")
 	public ResponseEntity<ProductReviewResponseDto> fetchSellerReviews(@RequestParam("sellerId") int sellerId) {

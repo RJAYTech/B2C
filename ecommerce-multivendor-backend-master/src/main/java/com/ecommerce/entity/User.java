@@ -9,6 +9,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 
 @Entity
 public class User {
@@ -21,11 +26,15 @@ public class User {
 
 	private String lastName;
 
+	@Email(message = "Give  proper email")
 	private String emailId;
 
 	@JsonIgnore
 	private String password;
 
+	 @NotBlank(message = "Phone number is required.")
+	 @Size(min = 10, max = 10, message = "Phone number should be exactly 10 digits")
+	 @Pattern(regexp = "\\d{10}", message = "Phone number should contain only digits")
 	private String phoneNo;
 
 	private String role;

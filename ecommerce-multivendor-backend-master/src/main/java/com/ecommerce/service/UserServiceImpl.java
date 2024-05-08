@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
-	
+
 	@Override
 	public User getUserByEmailIdAndRoleAndStatus(String emailId, String role, String status) {
 		return this.userDao.findByEmailIdAndRoleAndStatus(emailId, role, status);
@@ -72,5 +72,11 @@ public class UserServiceImpl implements UserService {
 	public List<User> getUserByRoleAndStatus(String role, String status) {
 		return this.userDao.findByRoleAndStatus(role, status);
 	}
-	
+
+	@Override
+	public List<User> findByPhoneNoo(String phoneNo) {
+		// TODO Auto-generated method stub
+		return this.userDao.findByPhoneNo(phoneNo);
+	}
+
 }

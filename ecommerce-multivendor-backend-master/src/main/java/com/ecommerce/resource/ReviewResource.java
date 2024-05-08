@@ -117,7 +117,7 @@ public class ReviewResource {
 
 			return new ResponseEntity<ProductReviewResponseDto>(response, HttpStatus.OK);
 		}
-		
+
 		double averageRating = averageProductRating(reviews);
 
 		response.setReviews(reviews);
@@ -145,10 +145,10 @@ public class ReviewResource {
 
 		// Calculate the average rating
 		double averageRating = (double) sum / totalReviews;
-		
+
 		// Format the average rating to one decimal place
-	    DecimalFormat df = new DecimalFormat("#.#");
-	    averageRating = Double.parseDouble(df.format(averageRating));
+		DecimalFormat df = new DecimalFormat("#.#");
+		averageRating = Double.parseDouble(df.format(averageRating));
 
 		return averageRating;
 	}

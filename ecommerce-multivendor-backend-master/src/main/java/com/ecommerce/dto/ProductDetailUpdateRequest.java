@@ -2,9 +2,8 @@ package com.ecommerce.dto;
 
 import java.math.BigDecimal;
 
-
 public class ProductDetailUpdateRequest {
-	
+
 	private int id;
 
 	private String name;
@@ -12,9 +11,9 @@ public class ProductDetailUpdateRequest {
 	private String description;
 
 	private BigDecimal price;
-	
+
 	private int categoryId;
-	
+
 	private int quantity;
 
 	public int getId() {
@@ -65,6 +64,4 @@ public class ProductDetailUpdateRequest {
 		this.quantity = quantity;
 	}
 
-	
-	
 }

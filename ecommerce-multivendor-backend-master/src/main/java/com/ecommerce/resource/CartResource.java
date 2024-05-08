@@ -72,9 +72,9 @@ public class CartResource {
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);
 		}
-		
-		if(product.getQuantity() < request.getQuantity()) {
-			response.setResponseMessage("Only "+product.getQuantity()+" Quantity is available!!!");
+
+		if (product.getQuantity() < request.getQuantity()) {
+			response.setResponseMessage("Only " + product.getQuantity() + " Quantity is available!!!");
 			response.setSuccess(false);
 
 			return new ResponseEntity<CommonApiResponse>(response, HttpStatus.BAD_REQUEST);

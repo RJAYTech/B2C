@@ -27,6 +27,7 @@ public interface ProductDao extends JpaRepository<Product, Integer> {
 
 	List<Product> findByNameContainingIgnoreCaseAndStatusIn(String productName, List<String> status);
 
-	List<Product> findByNameContainingIgnoreCaseAndSellerAndStatusIn(String productName, User seller, List<String> status);
-	
+	List<Product> findByNameContainingIgnoreCaseAndSellerAndStatusIn(String productName, User seller,
+			List<String> status);
+
 }

@@ -32,19 +32,19 @@ public class CartController {
 	public ResponseEntity<CommonApiResponse> addCategory(@RequestBody CartRequestDto request) {
 		return cartResource.addToCart(request);
 	}
-	
+
 	@PutMapping("/update")
 	@Operation(summary = "Api to update cart")
 	public ResponseEntity<CartResponseDto> updateCart(@RequestBody CartRequestDto request) {
 		return cartResource.updateCart(request);
 	}
-	
+
 	@DeleteMapping("/delete")
 	@Operation(summary = "Api to delete cart")
 	public ResponseEntity<CartResponseDto> deleteCart(@RequestBody CartRequestDto request) {
 		return cartResource.deleteCart(request);
 	}
-	
+
 	@GetMapping("/fetch")
 	@Operation(summary = "Api to fetch the user cart")
 	public ResponseEntity<CartResponseDto> fetchUserCart(@RequestParam("userId") int userId) {

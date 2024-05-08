@@ -5,10 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
 @Entity
 public class Category {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -50,7 +49,5 @@ public class Category {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
 
 }

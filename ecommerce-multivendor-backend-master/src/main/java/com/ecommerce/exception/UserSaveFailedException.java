@@ -10,9 +10,9 @@ public class UserSaveFailedException extends RuntimeException {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	public UserSaveFailedException(String message) {
 		super(message);
 	}
-	
+
 }

@@ -50,7 +50,7 @@ const ViewSellerOrders = () => {
 
   const retrieveAllorders = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch/seller-wise?sellerId=" + seller.id,
+      "http://localhost:2345/api/order/fetch/seller-wise?sellerId=" + seller.id,
       {
         headers: {
           Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
@@ -62,7 +62,7 @@ const ViewSellerOrders = () => {
 
   const retrieveAllUser = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/user/fetch/seller/delivery-person?sellerId=" +
+      "http://localhost:2345/api/user/fetch/seller/delivery-person?sellerId=" +
         seller.id,
       {
         headers: {
@@ -75,7 +75,7 @@ const ViewSellerOrders = () => {
 
   const retrieveOrdersById = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch?orderId=" + orderId
+      "http://localhost:2345/api/order/fetch?orderId=" + orderId
     );
     console.log(response.data);
     return response.data;
@@ -101,7 +101,7 @@ const ViewSellerOrders = () => {
   const assignToDelivery = (orderId, e) => {
     let data = { orderId: assignOrderId, deliveryId: deliveryPersonId };
 
-    fetch("http://localhost:8080/api/order/assign/delivery-person", {
+    fetch("http://localhost:2345/api/order/assign/delivery-person", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -247,7 +247,7 @@ const ViewSellerOrders = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            "http://localhost:2345/api/product/" +
                             order.product.image1
                           }
                           className="img-fluid"

@@ -19,7 +19,7 @@ const UpdateProductForm = () => {
 
   const retrieveAllCategories = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/category/fetch/all"
+      "http://localhost:2345/api/category/fetch/all"
     );
     return response.data;
   };
@@ -31,7 +31,7 @@ const UpdateProductForm = () => {
         setCategories(resCategory.categories);
       }
     };
-
+    
     getAllCategories();
   }, []);
 
@@ -45,10 +45,10 @@ const UpdateProductForm = () => {
     description: product.description,
     price: product.price,
     quantity: product.quantity,
-    categoryId: product.categoryId,
+    categoryId: product.category.id,
     sellerId: product.sellerId,
   });
-
+  console.log(updatedProduct.categoryId)
   const handleInput = (e) => {
     setUpdatedProduct({ ...updatedProduct, [e.target.name]: e.target.value });
   };
@@ -69,7 +69,7 @@ const UpdateProductForm = () => {
       return;
     }
 
-    fetch("http://localhost:8080/api/product/update/detail", {
+    fetch("http://localhost:2345/api/product/update/detail", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -78,6 +78,7 @@ const UpdateProductForm = () => {
       },
       body: JSON.stringify(updatedProduct),
     })
+    
       .then((result) => {
         result.json().then((res) => {
           if (res.success) {
@@ -164,7 +165,7 @@ const UpdateProductForm = () => {
     formData.append("id", product.id);
 
     axios
-      .put("http://localhost:8080/api/product/update/image", formData, {
+      .put("http://localhost:2345/api/product/update/image", formData, {
         headers: {
           Authorization: "Bearer " + seller_jwtToken, // Replace with your actual JWT token
         },
@@ -229,6 +230,7 @@ const UpdateProductForm = () => {
           window.location.reload(true);
         }, 2000); // Redirect after 3 seconds
       });
+      
   };
 
   return (
@@ -295,8 +297,9 @@ const UpdateProductForm = () => {
                       name="categoryId"
                       onChange={handleInput}
                       className="form-control"
+                      value={updatedProduct.categoryId}
                     >
-                      <option value="">Select Category</option>
+                    
 
                       {categories.map((category) => {
                         return (

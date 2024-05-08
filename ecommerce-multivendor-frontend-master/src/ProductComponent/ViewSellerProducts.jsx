@@ -40,7 +40,7 @@ const ViewSellerProducts = () => {
 
   // const retrieveAllProducts = async () => {
   //   const response = await axios.get(
-  //     "http://localhost:8080/api/product/fetch/seller-wise?sellerId=" +
+  //     "http://localhost:2345/api/product/fetch/seller-wise?sellerId=" +
   //     seller.id
   //   );
   //   console.log(response.data);
@@ -52,7 +52,7 @@ const ViewSellerProducts = () => {
   const retrieveAllProducts = async () => {
     if (seller) { // Check if seller object exists
       const response = await axios.get(
-        "http://localhost:8080/api/product/fetch/seller-wise?sellerId=" +
+        "http://localhost:2345/api/product/fetch/seller-wise?sellerId=" +
         seller.id
       );
       return response.data;
@@ -63,7 +63,7 @@ const ViewSellerProducts = () => {
 
   const deleteProduct = (productId, e) => {
     fetch(
-      "http://localhost:8080/api/product/delete?productId=" +
+      "http://localhost:2345/api/product/delete?productId=" +
       productId +
       "&sellerId=" +
       seller.id,
@@ -180,7 +180,7 @@ const ViewSellerProducts = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            "http://localhost:2345/api/product/" +
                             product.image1
                           }
                           class="img-fluid"

@@ -74,7 +74,7 @@ const ViewDeliveryOrders = () => {
 
   const retrieveAllorders = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch/delivery-wise?deliveryPersonId=" +
+      "http://localhost:2345/api/order/fetch/delivery-wise?deliveryPersonId=" +
         deliveryPerson.id,
       {
         headers: {
@@ -88,7 +88,7 @@ const ViewDeliveryOrders = () => {
 
   const retrieveAllDeliveryStatus = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch/delivery-status/all"
+      "http://localhost:2345/api/order/fetch/delivery-status/all"
     );
     console.log(response.data);
     return response.data;
@@ -96,7 +96,7 @@ const ViewDeliveryOrders = () => {
 
   const retrieveAllDeliveryTiming = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch/delivery-time/all"
+      "http://localhost:2345/api/order/fetch/delivery-time/all"
     );
     console.log(response.data);
     return response.data;
@@ -104,7 +104,7 @@ const ViewDeliveryOrders = () => {
 
   const retrieveOrdersById = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/order/fetch?orderId=" + orderId
+      "http://localhost:2345/api/order/fetch?orderId=" + orderId
     );
     console.log(response.data);
     return response.data;
@@ -130,7 +130,7 @@ const ViewDeliveryOrders = () => {
   const updateOrderStatus = (orderId, e) => {
     deliveryUpdateRequest.orderId = assignOrderId;
 
-    fetch("http://localhost:8080/api/order/update/delivery-status", {
+    fetch("http://localhost:2345/api/order/update/delivery-status", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -276,7 +276,7 @@ const ViewDeliveryOrders = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            "http://localhost:2345/api/product/" +
                             order.product.image1
                           }
                           className="img-fluid"

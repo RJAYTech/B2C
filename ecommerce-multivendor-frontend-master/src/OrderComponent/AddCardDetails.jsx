@@ -83,7 +83,7 @@ const AddCardDetails = () => {
       return;
     }
 
-    fetch("http://localhost:8080/api/order/add?userId=" + user.id, {
+    fetch("http://localhost:2345/api/order/add?userId=" + user.id, {
       method: "POST",
       headers: {
         Accept: "application/json",

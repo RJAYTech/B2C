@@ -33,7 +33,7 @@ const ViewMyCart = () => {
 
   const retrieveCart = async () => {
     const response = await axios.get(
-      "http://localhost:8080/api/cart/fetch?userId=" + user.id,
+      "http://localhost:2345/api/cart/fetch?userId=" + user.id,
       {
         headers: {
           Authorization: "Bearer " + customer_jwtToken, // Replace with your actual JWT token
@@ -45,7 +45,7 @@ const ViewMyCart = () => {
 
   const deleteCart = (cartId, e) => {
     const data = { id: cartId, userId: user.id };
-    fetch("http://localhost:8080/api/cart/delete", {
+    fetch("http://localhost:2345/api/cart/delete", {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -105,7 +105,7 @@ const ViewMyCart = () => {
 
   const incrementCart = (cart, e) => {
     const data = { id: cart.id, userId: user.id, quantity: cart.quantity + 1 };
-    fetch("http://localhost:8080/api/cart/update", {
+    fetch("http://localhost:2345/api/cart/update", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -165,7 +165,7 @@ const ViewMyCart = () => {
 
   const decrementCart = (cart, e) => {
     const data = { id: cart.id, userId: user.id, quantity: cart.quantity - 1 };
-    fetch("http://localhost:8080/api/cart/update", {
+    fetch("http://localhost:2345/api/cart/update", {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -288,7 +288,7 @@ const ViewMyCart = () => {
                       <td>
                         <img
                           src={
-                            "http://localhost:8080/api/product/" +
+                            "http://localhost:2345/api/product/" +
                             cart.product.image1
                           }
                           className="img-fluid"

@@ -44,7 +44,7 @@ const UserRegister = () => {
       // jwtToken = sessionStorage.getItem("seller-jwtToken"); // Use bank's JWT token for customer register
     }
 
-    fetch("http://localhost:8080/api/user/register", {
+    fetch("http://localhost:2345/api/user/register", {
       method: "POST",
       headers: {
         Accept: "application/json",

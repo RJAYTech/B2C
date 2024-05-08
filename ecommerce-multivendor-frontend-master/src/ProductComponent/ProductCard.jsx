@@ -17,7 +17,7 @@
 //     <div className="col">
 //       <div className="card product-card rounded-card custom-bg h-100 shadow-lg">
 //         <img
-//           src={"http://localhost:8080/api/product/" + product.item.image1}
+//           src={"http://localhost:2345/api/product/" + product.item.image1}
 //           className="card-img-top img-fluid rounded"
 //           alt="img"
 //           style={{
@@ -102,7 +102,7 @@ const ProductCard = ( product ) => {
     <div className="col">
       <div className="card product-card rounded-card custom-bg h-100 shadow-lg">
         <img
-          src={`http://localhost:8080/api/product/${image1}`}
+          src={`http://localhost:2345/api/product/${image1}`}
           className="card-img-top img-fluid rounded"
           alt="img"
           style={{

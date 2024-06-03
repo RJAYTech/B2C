@@ -14,11 +14,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'sit1', url: env.GITHUB_REPO_URL
-            }
-        }
+       
 
         stage('Sonar Analysis') {
             steps {

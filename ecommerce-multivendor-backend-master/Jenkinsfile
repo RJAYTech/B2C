@@ -1,6 +1,6 @@
 pipeline {
     agent any
-   
+    
     environment {
         GITHUB_REPO_URL = 'https://github.com/RJAYTech/B2C.git'
         ARTIFACTORY_IP = '43.204.202.141'

@@ -21,12 +21,24 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+        
     - name: SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: |
         cd ecommerce-multivendor-backend-master
-        mvn sonar:sonar -Dsonar.projectKey=b2b -Dsonar.host.url=http://13.202.41.44:9000 -Dsonar.login=$SONAR_TOKEN
+        mvn sonar:sonar \
+          -Dsonar.projectKey=b2b \
+          -Dsonar.host.url=http://13.202.41.44:9000 \
+          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.language=java \
+          -Dsonar.sources=src/main/java \
+          -Dsonar.tests=src/test/java \
+          -Dsonar.java.binaries=target/classes \
+          -Dsonar.java.test.binaries=target/test-classes \
+          -Dsonar.java.test.libraries=target/test-classes \
+          -Dsonar.java.libraries=target/dependency \
+          -Dsonar.sourceEncoding=UTF-8
 
     - name: Build with Maven
       run: |

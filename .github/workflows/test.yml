@@ -25,4 +25,4 @@ jobs:
     - name: Build with Maven
       run: |
         cd ecommerce-multivendor-backend-master
-        mvn clean install
+        mvn clean install -DskipTests

@@ -1,4 +1,4 @@
-name: Maven Build
+name: Maven Build and Docker Build
 
 on:
   push:
@@ -26,3 +26,11 @@ jobs:
       run: |
         cd ecommerce-multivendor-backend-master
         mvn clean install -DskipTests
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Docker image
+      run: |
+        cd ecommerce-multivendor-backend-master
+        docker build -t sit1:latest .

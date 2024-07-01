@@ -21,7 +21,12 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
-        
+
+    - name: Build with Maven (Compile)
+      run: |
+        cd ecommerce-multivendor-backend-master
+        mvn clean compile -DskipTests
+
     - name: SonarQube Scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -36,8 +41,6 @@ jobs:
           -Dsonar.tests=src/test/java \
           -Dsonar.java.binaries=target/classes \
           -Dsonar.java.test.binaries=target/test-classes \
-          -Dsonar.java.test.libraries=target/test-classes \
-          -Dsonar.java.libraries=target/dependency \
           -Dsonar.sourceEncoding=UTF-8
 
     - name: Build with Maven

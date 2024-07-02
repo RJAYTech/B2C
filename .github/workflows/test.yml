@@ -22,10 +22,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build with Maven (Compile)
+    - name: Build with Maven (Package)
       run: |
         cd ecommerce-multivendor-backend-master
-        mvn clean install -DskipTests
+        mvn clean package -DskipTests
 
     - name: Run SonarQube analysis
       run: |
@@ -46,8 +46,28 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       run: |
         cd ecommerce-multivendor-backend-master
         docker build -t rjayb2b/sit1:latest .
+
+    - name: Install Trivy
+      run: |
+        sudo yum install -y wget
+        wget https://github.com/aquasecurity/trivy/releases/download/v0.41.0/trivy_0.41.0_Linux-64bit.rpm
+        sudo rpm -ivh trivy_0.41.0_Linux-64bit.rpm
+
+    - name: Scan Docker image with Trivy and save report
+      run: |
+        trivy image rjayb2b/sit1:latest > trivy-report.txt
+
+    - name: Upload Trivy scan report
+      uses: actions/upload-artifact@v3
+      with:
+        name: trivy-report
+        path: trivy-report.txt
+
+    - name: Push Docker image to Docker Hub
+      run: |
+        cd ecommerce-multivendor-backend-master
         docker push rjayb2b/sit1:latest

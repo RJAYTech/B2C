@@ -1,4 +1,4 @@
-name: Maven Build and Docker Build   
+name: Maven Build and Docker Build
 
 on:
   push:
@@ -51,11 +51,15 @@ jobs:
         cd ecommerce-multivendor-backend-master
         docker build -t rjayb2b/sit1:latest .
 
-    - name: Install Trivy
+    - name: Install Trivy if not already installed
       run: |
-        sudo yum install -y wget
-        wget https://github.com/aquasecurity/trivy/releases/download/v0.41.0/trivy_0.41.0_Linux-64bit.rpm
-        sudo rpm -ivh trivy_0.41.0_Linux-64bit.rpm
+        if ! command -v trivy &> /dev/null; then
+          sudo yum install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/download/v0.41.0/trivy_0.41.0_Linux-64bit.rpm
+          sudo rpm -ivh trivy_0.41.0_Linux-64bit.rpm
+        else
+          echo "Trivy is already installed"
+        fi
 
     - name: Scan Docker image with Trivy and save report
       run: |

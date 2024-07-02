@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [self-hosted, amazon-linux]
 
     steps:
     - name: Checkout repository
@@ -53,8 +53,7 @@ jobs:
 
     - name: Install dependencies for Trivy
       run: |
-        sudo apt-get update
-        sudo apt-get install -y wget rpm
+        sudo yum install -y wget rpm
 
     - name: Install Trivy if not already installed
       run: |

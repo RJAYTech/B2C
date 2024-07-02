@@ -25,7 +25,7 @@ jobs:
     - name: Build with Maven (Compile)
       run: |
         cd ecommerce-multivendor-backend-master
-        mvn clean compile -DskipTests
+        mvn clean install -DskipTests
 
     - name: Run SonarQube analysis
       run: |

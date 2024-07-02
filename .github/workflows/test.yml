@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: [ubuntu-latest]
 
     steps:
     - name: Checkout repository
@@ -51,10 +51,14 @@ jobs:
         cd ecommerce-multivendor-backend-master
         docker build -t rjayb2b/sit1:latest .
 
+    - name: Install dependencies for Trivy
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y wget rpm
+
     - name: Install Trivy if not already installed
       run: |
         if ! command -v trivy &> /dev/null; then
-          sudo yum install -y wget
           wget https://github.com/aquasecurity/trivy/releases/download/v0.41.0/trivy_0.41.0_Linux-64bit.rpm
           sudo rpm -ivh trivy_0.41.0_Linux-64bit.rpm
         else

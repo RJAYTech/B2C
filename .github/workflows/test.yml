@@ -61,6 +61,9 @@ jobs:
           echo "Trivy is already installed"
         fi
 
+    - name: Update Trivy database
+      run: trivy image --download-db-only
+
     - name: Scan Docker image with Trivy and save report
       run: |
         trivy image rjayb2b/sit1:latest > trivy-report.txt

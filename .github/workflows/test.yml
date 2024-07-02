@@ -1,4 +1,4 @@
-name: Maven Build and Docker Build 
+name: Maven Build and Docker Build  
 
 on:
   push:
